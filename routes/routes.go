@@ -10,5 +10,6 @@ func SetupRoutes(e *gin.Engine) {
 	{
 		api.GET("/menu", handlers.Menu)
 		api.GET("/users", handlers.Users)
+		api.POST("/creat/user", handlers.CreatUsers)
 	}
 }

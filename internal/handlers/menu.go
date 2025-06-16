@@ -1,7 +1,19 @@
 package handlers
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/MatBas09/API-in-golang/config"
+	"github.com/MatBas09/API-in-golang/internal/models"
+	"github.com/gin-gonic/gin"
+)
 
 func Menu(c *gin.Context) {
-	c.JSON(200, gin.H{"Message: ": "It´s ok"})
+	var menuItens []models.MenuItem
+
+	result := config.DB.Find(&menuItens)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": result.Error.Error()})
+	}
+	c.JSON(http.StatusOK, menuItens)
 }

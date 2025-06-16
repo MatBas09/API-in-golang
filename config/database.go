@@ -23,7 +23,7 @@ func ConnectDatabase() {
 	_, err := os.Stat(dbFolder)
 	if os.IsNotExist(err) {
 		creatDbFolder()
-	} else {
+	} else if err != nil {
 		panic("one erro has occorrude trying to get info about db folder")
 	} 
 
@@ -32,5 +32,5 @@ func ConnectDatabase() {
 		panic("can´t open the database")
 	}
 
-	DB.AutoMigrate(&models.MenuItem{})
+	DB.AutoMigrate(&models.MenuItem{}, &models.User{})
 }
